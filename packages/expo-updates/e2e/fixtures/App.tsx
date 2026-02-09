@@ -31,8 +31,8 @@ function _handleE2EStateChangeEvent(params: any) {
 
 function useNativeInterfaceState() {
   const runtimeVersion = ExpoUpdatesE2ETestModule.getRuntimeVersion();
-  const embeddedUpdateId = ExpoUpdatesE2ETestModule.getEmbeddedUpdateId().toLowerCase();
-  const launchedUpdateId = ExpoUpdatesE2ETestModule.getLaunchedUpdateId().toLowerCase();
+  const embeddedUpdateId = ExpoUpdatesE2ETestModule.getEmbeddedUpdateId()?.toLowerCase();
+  const launchedUpdateId = ExpoUpdatesE2ETestModule.getLaunchedUpdateId()?.toLowerCase();
   const [state, setState] = React.useState<NativeInterfaceState>({
     type: null,
     manifest: null,
