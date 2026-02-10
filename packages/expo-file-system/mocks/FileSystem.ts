@@ -15,8 +15,11 @@ export function info(url: URL): any {}
 export async function downloadFileAsync(
   url: URL,
   to: FileSystemPath,
-  options: DownloadOptions | undefined
+  options: DownloadOptions | undefined,
+  uuid: string | undefined
 ): Promise<any> {}
+
+export function cancelDownloadAsync(uuid: string): void {}
 
 export class FileSystemFile {
   validatePath(): any {}
