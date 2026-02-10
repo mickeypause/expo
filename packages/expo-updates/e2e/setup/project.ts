@@ -363,7 +363,8 @@ async function preparePackageJson(
         'tvos:build':
           'set -o pipefail && xcodebuild -workspace ios/updatese2e.xcworkspace -scheme updatese2e -configuration Debug -sdk appletvsimulator -arch arm64 -derivedDataPath ios/build | npx @expo/xcpretty',
         postinstall: 'patch-package',
-        'start:dev-client': 'npx expo start --private-key-path ./keys/private-key.pem &',
+        'start:dev-client':
+          'CI=false npx expo start --private-key-path ./keys/private-key.pem > /dev/null 2>&1 &',
         ...extraScriptsGenerateTestUpdateBundlesPart,
       }
     : extraScriptsAssetExclusion;
