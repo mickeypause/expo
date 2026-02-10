@@ -8,6 +8,8 @@
 
 ### 🐛 Bug fixes
 
+- Fix port prompt causing process hangs on some systems when checking the conflicting process's info
+
 ### 💡 Others
 
 - Bump to `dnssd-advertise@^1.1.3` ([#42928](https://github.com/expo/expo/pull/42928) by [@kitten](https://github.com/kitten))
