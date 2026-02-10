@@ -58,6 +58,14 @@ type RNSharedHeaderItem = Pick<
   | 'accessibilityHint'
 >;
 
+export function extractXcassetName(props: StackHeaderItemSharedProps): string | undefined {
+  const iconComponentProps = getFirstChildOfType(props.children, StackToolbarIcon)?.props;
+  if (iconComponentProps && 'xcasset' in iconComponentProps) {
+    return iconComponentProps.xcasset;
+  }
+  return undefined;
+}
+
 export function convertStackHeaderSharedPropsToRNSharedHeaderItem(
   props: StackHeaderItemSharedProps
 ): RNSharedHeaderItem {
@@ -91,6 +99,14 @@ export function convertStackHeaderSharedPropsToRNSharedHeaderItem(
         source: iconComponentProps.src,
         tinted: effectiveRenderingMode === 'template',
       };
+    }
+    if ('xcasset' in iconComponentProps) {
+      // Type assertion needed: xcasset is supported by react-native-screens
+      // but not yet typed in @react-navigation/native-stack's PlatformIconIOS
+      return {
+        type: 'xcasset',
+        name: iconComponentProps.xcasset,
+      } as unknown as NativeStackHeaderItemButton['icon'];
     }
     return {
       type: 'sfSymbol',

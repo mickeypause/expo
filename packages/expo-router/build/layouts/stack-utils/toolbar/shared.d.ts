@@ -36,6 +36,7 @@ export interface StackHeaderItemSharedProps {
     variant?: 'plain' | 'done' | 'prominent';
 }
 type RNSharedHeaderItem = Pick<NativeStackHeaderItemButton, 'label' | 'labelStyle' | 'icon' | 'variant' | 'tintColor' | 'disabled' | 'width' | 'hidesSharedBackground' | 'sharesBackground' | 'identifier' | 'badge' | 'accessibilityLabel' | 'accessibilityHint'>;
+export declare function extractXcassetName(props: StackHeaderItemSharedProps): string | undefined;
 export declare function convertStackHeaderSharedPropsToRNSharedHeaderItem(props: StackHeaderItemSharedProps): RNSharedHeaderItem;
 export {};
 //# sourceMappingURL=shared.d.ts.map

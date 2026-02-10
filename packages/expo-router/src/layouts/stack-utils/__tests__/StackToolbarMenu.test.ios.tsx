@@ -425,6 +425,21 @@ describe('submenu conversion', () => {
       );
     });
 
+    it('warns for xcasset icons in submenu', () => {
+      convertStackToolbarMenuPropsToRNHeaderItem({
+        children: (
+          <StackToolbarMenu title="Submenu">
+            <StackToolbarIcon xcasset="custom-icon" />
+            <StackToolbarMenuAction onPress={() => {}}>Action</StackToolbarMenuAction>
+          </StackToolbarMenu>
+        ),
+      });
+
+      expect(consoleSpy).toHaveBeenCalledWith(
+        'When Icon is used inside Stack.Toolbar.Menu used as a submenu, only sfSymbol icons are supported. This is a limitation of React Native Screens.'
+      );
+    });
+
     it('accepts SF Symbol icons in submenu', () => {
       const result = convertStackToolbarMenuPropsToRNHeaderItem({
         children: (
