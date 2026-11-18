@@ -793,6 +793,28 @@ export default function TabLayout() {
   className="max-w-[540px]"
 />
 
+#### Customize the badge text
+
+On iOS, you can change the text style and position of every badge in the tab bar with the `badgeTextColor`, `badgeStyle`, and `badgePositionAdjustment` props of `NativeTabs`. The `badgeStyle` prop accepts `fontFamily`, `fontSize`, and `fontWeight`. The system sizes a badge from its text, so `fontSize` also changes the badge size.
+
+```tsx src/app/_layout.tsx
+import { NativeTabs } from 'expo-router/native-tabs';
+
+export default function TabLayout() {
+  return (
+    <NativeTabs
+      badgeBackgroundColor="#0A84FF"
+      badgeTextColor="#FFFFFF"
+      badgeStyle={{ fontFamily: 'Courier', fontSize: 12, fontWeight: '700' }}
+      badgePositionAdjustment={{ horizontal: 4, vertical: -2 }}>
+      <NativeTabs.Trigger name="messages">
+        <NativeTabs.Trigger.Badge>9+</NativeTabs.Trigger.Badge>
+      </NativeTabs.Trigger>
+    </NativeTabs>
+  );
+}
+```
+
 ## Customizing the tab bar
 
 Since the native tab layout's appearance varies by platform, the customization options are also different. For all customization options, see the [API reference for `NativeTabs`](/versions/latest/sdk/router/native-tabs/).
