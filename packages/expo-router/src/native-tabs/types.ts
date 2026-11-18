@@ -110,9 +110,21 @@ export interface NativeTabOptions extends DefaultRouterOptions {
   badgeBackgroundColor?: ColorValue;
   /**
    * @platform android
+   * @platform iOS
    * @platform web
    */
   badgeTextColor?: ColorValue;
+  /**
+   * @platform iOS
+   */
+  badgeStyle?: NativeTabsBadgeStyle;
+  /**
+   * @platform iOS
+   */
+  badgePositionAdjustment?: {
+    horizontal?: number;
+    vertical?: number;
+  };
   /**
    * @platform android
    * @platform iOS
@@ -287,6 +299,11 @@ export type NativeTabsLabelStyle = Pick<
   'fontFamily' | 'fontSize' | 'fontStyle' | 'fontWeight' | 'color'
 >;
 
+/**
+ * Text style of the tab bar item badge.
+ */
+export type NativeTabsBadgeStyle = Pick<TextStyle, 'fontFamily' | 'fontSize' | 'fontWeight'>;
+
 export const SUPPORTED_BLUR_EFFECTS = [
   'none',
   'systemDefault',
@@ -356,6 +373,10 @@ export interface NativeTabsProps extends PropsWithChildren {
    */
   badgeBackgroundColor?: ColorValue;
   /**
+   * The color of the badge text of every badge in the tab bar.
+   */
+  badgeTextColor?: ColorValue;
+  /**
    * When set to `true`, hides the tab bar.
    *
    * @default false
@@ -408,6 +429,27 @@ export interface NativeTabsProps extends PropsWithChildren {
    * @platform iOS
    */
   titlePositionAdjustment?: {
+    horizontal?: number;
+    vertical?: number;
+  };
+  /**
+   * The text style of every badge in the tab bar.
+   *
+   * UIKit sizes the badge based on its text, so `fontSize` also affects the badge size.
+   *
+   * @see [Apple documentation](https://developer.apple.com/documentation/uikit/uitabbaritemstateappearance/badgetextattributes)
+   *
+   * @platform iOS
+   */
+  badgeStyle?: NativeTabsBadgeStyle;
+  /**
+   * The offset of every badge in the tab bar.
+   *
+   * @see [Apple documentation](https://developer.apple.com/documentation/uikit/uitabbaritemstateappearance/badgepositionadjustment)
+   *
+   * @platform iOS
+   */
+  badgePositionAdjustment?: {
     horizontal?: number;
     vertical?: number;
   };
@@ -475,13 +517,6 @@ export interface NativeTabsProps extends PropsWithChildren {
    * @platform web
    */
   indicatorColor?: ColorValue;
-  /**
-   * The color of the badge text.
-   *
-   * @platform android
-   * @platform web
-   */
-  badgeTextColor?: ColorValue;
   /**
    * When `true`, the tab bar lifts above the keyboard (input method editor, or IME) instead of being overlaid by it. By default, the keyboard overlays the tab bar.
    *
@@ -568,6 +603,8 @@ export interface NativeTabsViewProps extends Omit<
   | 'blurEffect'
   | 'indicatorColor'
   | 'badgeTextColor'
+  | 'badgeStyle'
+  | 'badgePositionAdjustment'
   | 'rippleColor'
   | 'disableIndicator'
   | 'labelVisibilityMode'

@@ -33,6 +33,26 @@ describe(createStandardAppearanceFromOptions, () => {
     };
     expect(result).toEqual(expectedAppearance);
   });
+  it.each([createStandardAppearanceFromOptions, createScrollEdgeAppearanceFromOptions])(
+    'maps badge text style options to the item state appearance',
+    (createAppearance) => {
+      const result = createAppearance({
+        badgeTextColor: 'white',
+        badgeStyle: { fontFamily: 'Courier', fontSize: 12, fontWeight: 700 },
+        badgePositionAdjustment: { horizontal: 4, vertical: -2 },
+      });
+      const expected: TabsScreenItemStateAppearanceIOS = {
+        tabBarItemBadgeTextColor: 'white',
+        tabBarItemBadgeFontFamily: 'Courier',
+        tabBarItemBadgeFontSize: 12,
+        tabBarItemBadgeFontWeight: '700',
+        tabBarItemBadgePositionAdjustment: { horizontal: 4, vertical: -2 },
+      };
+      for (const state of ['normal', 'selected', 'focused'] as const) {
+        expect(result.stacked?.[state]).toEqual(expected);
+      }
+    }
+  );
   it.each([true, false, undefined])(
     'should create correct appearance with disableTransparentOnScrollEdge: %p',
     (disableTransparentOnScrollEdge) => {
@@ -429,6 +449,15 @@ describe(convertStyleToItemStateAppearance, () => {
     [{}, {}],
     [{ backgroundColor: '#fff' }, {}],
     [{ blurEffect: 'none' }, {}],
+    [{ badgeTextColor: '#00ff00' }, { tabBarItemBadgeTextColor: '#00ff00' }],
+    [{ badgeFontFamily: 'Courier' }, { tabBarItemBadgeFontFamily: 'Courier' }],
+    [{ badgeFontSize: 12 }, { tabBarItemBadgeFontSize: 12 }],
+    [{ badgeFontWeight: '800' }, { tabBarItemBadgeFontWeight: '800' }],
+    [{ badgeFontWeight: 800 }, { tabBarItemBadgeFontWeight: '800' }],
+    [
+      { badgePositionAdjustment: { horizontal: 4, vertical: -2 } },
+      { tabBarItemBadgePositionAdjustment: { horizontal: 4, vertical: -2 } },
+    ],
     [{ fontFamily: 'xxx' }, { tabBarItemTitleFontFamily: 'xxx' }],
     [{ fontSize: 16 }, { tabBarItemTitleFontSize: 16 }],
     [{ fontWeight: '700' }, { tabBarItemTitleFontWeight: '700' }],
