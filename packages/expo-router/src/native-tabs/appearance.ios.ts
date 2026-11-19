@@ -1,4 +1,4 @@
-import type { ColorValue } from 'react-native';
+import type { ColorValue, TextStyle } from 'react-native';
 import type {
   TabsScreenAppearanceIOS,
   TabsScreenItemAppearanceIOS,
@@ -37,6 +37,11 @@ export function createStandardAppearanceFromOptions(
       backgroundColor: options.backgroundColor,
       blurEffect,
       badgeBackgroundColor: options.badgeBackgroundColor,
+      badgeTextColor: options.badgeTextColor,
+      badgeFontFamily: options.badgeStyle?.fontFamily,
+      badgeFontSize: options.badgeStyle?.fontSize,
+      badgeFontWeight: options.badgeStyle?.fontWeight,
+      badgePositionAdjustment: options.badgePositionAdjustment,
       titlePositionAdjustment: options.titlePositionAdjustment,
       shadowColor: options.shadowColor,
     },
@@ -77,6 +82,11 @@ export function createScrollEdgeAppearanceFromOptions(
       backgroundColor: options.disableTransparentOnScrollEdge ? options.backgroundColor : null,
       shadowColor: options.disableTransparentOnScrollEdge ? options.shadowColor : 'transparent',
       badgeBackgroundColor: options.badgeBackgroundColor,
+      badgeTextColor: options.badgeTextColor,
+      badgeFontFamily: options.badgeStyle?.fontFamily,
+      badgeFontSize: options.badgeStyle?.fontSize,
+      badgeFontWeight: options.badgeStyle?.fontWeight,
+      badgePositionAdjustment: options.badgePositionAdjustment,
       titlePositionAdjustment: options.titlePositionAdjustment,
     },
     {},
@@ -101,6 +111,14 @@ export interface AppearanceStyle extends NativeTabsLabelStyle {
   backgroundColor?: ColorValue | null;
   blurEffect?: NativeTabsBlurEffect;
   badgeBackgroundColor?: ColorValue;
+  badgeTextColor?: ColorValue;
+  badgeFontFamily?: TextStyle['fontFamily'];
+  badgeFontSize?: TextStyle['fontSize'];
+  badgeFontWeight?: TextStyle['fontWeight'];
+  badgePositionAdjustment?: {
+    horizontal?: number;
+    vertical?: number;
+  };
   shadowColor?: ColorValue;
   titlePositionAdjustment?: {
     horizontal?: number;
@@ -201,6 +219,11 @@ export function convertStyleToItemStateAppearance(
   }
   const stateAppearance: TabsScreenItemStateAppearanceIOS = {
     tabBarItemBadgeBackgroundColor: style.badgeBackgroundColor,
+    tabBarItemBadgeTextColor: style.badgeTextColor,
+    tabBarItemBadgeFontFamily: style.badgeFontFamily,
+    tabBarItemBadgeFontSize: style.badgeFontSize,
+    tabBarItemBadgeFontWeight: convertFontWeightToStringFontWeight(style.badgeFontWeight),
+    tabBarItemBadgePositionAdjustment: style.badgePositionAdjustment,
     tabBarItemTitlePositionAdjustment: style.titlePositionAdjustment,
     tabBarItemIconColor: style.iconColor,
     tabBarItemTitleFontFamily: style.fontFamily,

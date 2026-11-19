@@ -144,6 +144,8 @@ it('when no options are passed, default ones are used', async () => {
     badgeBackgroundColor: undefined,
     indicatorColor: undefined,
     badgeTextColor: undefined,
+    badgeStyle: undefined,
+    badgePositionAdjustment: undefined,
     nativeProps: undefined,
     disableAutomaticContentInsets: undefined,
     contentStyle: undefined,
