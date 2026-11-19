@@ -117,7 +117,7 @@ export interface NativeTabOptions extends DefaultRouterOptions {
   /**
    * @platform iOS
    */
-  badgeStyle?: NativeTabsBadgeStyle;
+  badgeStyle?: Pick<TextStyle, 'fontFamily' | 'fontSize' | 'fontWeight'>;
   /**
    * @platform iOS
    */
@@ -299,11 +299,6 @@ export type NativeTabsLabelStyle = Pick<
   'fontFamily' | 'fontSize' | 'fontStyle' | 'fontWeight' | 'color'
 >;
 
-/**
- * Text style of the tab bar item badge.
- */
-export type NativeTabsBadgeStyle = Pick<TextStyle, 'fontFamily' | 'fontSize' | 'fontWeight'>;
-
 export const SUPPORTED_BLUR_EFFECTS = [
   'none',
   'systemDefault',
@@ -441,7 +436,7 @@ export interface NativeTabsProps extends PropsWithChildren {
    *
    * @platform iOS
    */
-  badgeStyle?: NativeTabsBadgeStyle;
+  badgeStyle?: Pick<TextStyle, 'fontFamily' | 'fontSize' | 'fontWeight'>;
   /**
    * The offset of every badge in the tab bar.
    *

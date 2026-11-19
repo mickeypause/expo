@@ -14,7 +14,6 @@ export type {
   NativeTabsProps,
   NativeTabTriggerProps,
   NativeTabsLabelStyle,
-  NativeTabsBadgeStyle,
   NativeTabsHostNativeProps,
   SymbolOrImageSource,
   NativeTabsTabBarItemLabelVisibilityMode,
